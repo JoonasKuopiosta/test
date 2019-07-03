@@ -1,5 +1,6 @@
 package jns.second_test;
 
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ public class Main extends JavaPlugin {
 	EventManager eventManager;
 	boolean eventActive;
 	boolean matchRunning;
+	World world;
 	
 	//TODO: Systeemi joka automaattisesti karsii poissaolevat pelaajat
 	
@@ -35,49 +37,55 @@ public class Main extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player caster = (Player) sender;
-		if (label.equalsIgnoreCase("hello") && caster instanceof Player) {
-			getLogger().info("Command worked, " + caster.getName() + ", with argument size: " + Integer.toString(args.length));
-			
-			if(args.length >= 1) {
-				String[] argus = toLenghtOf5(args);
+		if (label.equalsIgnoreCase("event")) {
+			if (caster instanceof Player) { // Commands for players
+				getLogger().info("Command worked, " + caster.getName() + ", with argument size: " + Integer.toString(args.length));
 				
-				switch (argus[0]) {
-				case "startup":
-					if (!eventActive) {
-						eventActive = true;
-						eventManager = new EventManager(this);
-						eventManager.startUp();
-						caster.sendMessage(ChatColor.GREEN + "Aktivoit eventin! Muista lisätä pelaajat!");
-					} else {
-						sender.sendMessage(ChatColor.RED + "Event on jo aktiivinen!");
-					}
-					break;
-				case "player":
-					if (eventActive) {
-						if (!matchRunning) {
-							//TODO: kutsu eventtiin
-							eventManager.commandToPlayerManager(argus, caster);
+				if(args.length >= 1) {
+					String[] argus = toLenghtOf5(args);
+					
+					switch (argus[0]) {
+					case "startup":
+						if (!eventActive) {
+							eventActive = true;
+							world = caster.getWorld();
+							eventManager = new EventManager(this, world);
+							eventManager.startUp();
+							caster.sendMessage(ChatColor.GREEN + "Aktivoit eventin! Muista lisätä pelaajat!");
 						} else {
-							caster.sendMessage(ChatColor.RED + "Kesken matsin et voi vaikuttaa pelaajiin!");
+							sender.sendMessage(ChatColor.RED + "Event on jo aktiivinen!");
 						}
-					} else {
-						caster.sendMessage(ChatColor.RED + "Muista aktivoida event /[anime] startup!"); //TODO: Korjaa viestit
+						break;
+					case "player":
+						if (eventActive) {
+							if (!matchRunning) {
+								//TODO: kutsu eventtiin
+								eventManager.commandToPlayerManager(argus, caster);
+							} else {
+								caster.sendMessage(ChatColor.RED + "Kesken matsin et voi vaikuttaa pelaajiin!");
+							}
+						} else {
+							caster.sendMessage(ChatColor.RED + "Muista aktivoida event /[anime] startup!"); //TODO: Korjaa viestit
+						}
+						break;
+					case "start":
+						if (eventActive) {
+							//TODO: kutsu eventtiin
+							caster.sendMessage(ChatColor.GREEN + "Erä on nyt käynnissä!");
+						} else {
+							caster.sendMessage(ChatColor.RED + "Muista aktivoida event jaada jaada!");
+						}
+						break;
+					case "status":
+						caster.sendMessage(ChatColor.GREEN + "Event active: " + eventActive + " Match running: " + matchRunning);
+						break;
+					default:
+						caster.sendMessage(ChatColor.LIGHT_PURPLE + "Sallitut komennot: startup, player, start, status");
+						break;
 					}
-					break;
-				case "start":
-					if (eventActive) {
-						//TODO: kutsu eventtiin
-						caster.sendMessage(ChatColor.GREEN + "Erä on nyt käynnissä!");
-					} else {
-						caster.sendMessage(ChatColor.RED + "Muista aktivoida event jaada jaada!");
-					}
-					break;
-				default:
-					caster.sendMessage(ChatColor.LIGHT_PURPLE + "Sallitut komennot: startup, player, start");
-					break;
+				} else {
+					caster.sendMessage("Sallitut komennot: startup, player, start");
 				}
-			} else {
-				caster.sendMessage("Sallitut komennot: startup, player, start");
 			}
 		}
 		return true;

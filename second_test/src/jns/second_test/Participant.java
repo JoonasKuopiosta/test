@@ -45,6 +45,10 @@ public class Participant {
 	
 	// =========== REST OF METHODS START HERE ===========
 	
+	public boolean surivorInitialization() {		
+		return true;
+	}
+	
 	public String changeTeam() {
 		// Changes the team of the participant to the opposite of what it currently is
 		// Returns the new team assigned to the participant

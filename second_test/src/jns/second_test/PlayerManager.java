@@ -3,12 +3,13 @@ package jns.second_test;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class PlayerManager{
-	
+
 	float maxDistForNear;
 	String prsdArgs;
 	
@@ -20,9 +21,9 @@ public class PlayerManager{
 	}
 	
 	public void commandParser(String[] argus, Player caster) {
-		boolean isPlayer = caster instanceof Player;
-		String infoText = "Sallitut player-komennot: add, remove, addnear, printall, clear";
+		String infoText = "Sallitut player-komennot: add, remove, addnear, printall, clear, tpall";
 		boolean result = false;
+		int num = 0;
 		
 		if (argus[1] != null){
 			String param = argus[2];
@@ -53,42 +54,44 @@ public class PlayerManager{
 				}
 				break;
 			case "addnear":
-				if (!isPlayer) {
-					infoText = "addnear ei ole sallittu konsoli-komento!";
-				} else {
 					addNearbyPlayersToList(caster, maxDistForNear);
-					int num = addNearbyPlayersToList(caster, maxDistForNear);
+					num = addNearbyPlayersToList(caster, maxDistForNear);
 					if (num < 1) {
 						infoText = "Lähelläsi ei yhtään pelaajaa!";
 					} else {
 						infoText = "Lisäsit " + num + " pelaajaa!";
+						result = true;
 					}
-				}
 				break;
 			case "clear":
-				int num = clearAllParticipants();
+				num = clearAllParticipants();
 				if (num < 1) {
-					infoText = "Ei yhtään pelaajaa poistettavaksi!";
+					infoText = "Ei yhtään pelaajaa poistettavaksi! :(";
 				} else {
 					infoText = "Poistit juuri " + num + " pelaajaa";
+					result = true;
 				}
 				break;
 			case "printall":
 				printAllParticipants(caster);
 				infoText = null;
 				break;
+			case "tpall":
+				num = teleportAllParticipantsTo(caster.getLocation());
+				if (num < 1) {
+					infoText = "Ei ketään teleportattavaksi! :(";
+				} else {
+					infoText = "Teleporttasit " + num + " pelaajaa!";
+				}
+				break;
 			}
 		}
 		
 		if (infoText != null) {
-			if (isPlayer) {
-				if (result) {
-					caster.sendMessage(ChatColor.GREEN + infoText);
-				} else {
-					caster.sendMessage(ChatColor.RED + infoText);
-				}
+			if (result) {
+				caster.sendMessage(ChatColor.GREEN + infoText);
 			} else {
-				Bukkit.getLogger().info(infoText);
+				caster.sendMessage(ChatColor.RED + infoText);
 			}
 		}
 	}
@@ -145,6 +148,18 @@ public class PlayerManager{
 		return amountRemoved;
 	}
 	
+	public int teleportAllParticipantsTo(Location cords) {
+		int movedParticipants = 0;
+		
+		for (Participant part : participantList) {
+			part.getPlayer().teleport(cords);
+			movedParticipants++;
+		}
+		
+		
+		return movedParticipants;
+	}
+	
 	// =========== PRIVATE METHODS START HERE ===========
 	
 	private Player getPlayerByName(String playerName) {
@@ -192,19 +207,11 @@ public class PlayerManager{
 		int size = participantList.size();
 		
 		if (participantList.size() < 1) {
-			if (caster instanceof Player) {
-				caster.sendMessage(ChatColor.RED + "Ei pelaajia :(");
-			} else {
-				Bukkit.getLogger().info("Ei pelaajia :(");
-			}
+			caster.sendMessage(ChatColor.RED + "Ei pelaajia :(");
 		}
 		
 		for (Participant part : participantList) {
-			if (caster instanceof Player) {
-				caster.sendMessage(ChatColor.GREEN + part.toString() + " " + size);
-			} else {
-				Bukkit.getLogger().info(part.toString() + " " + size);
-			}
+			caster.sendMessage(ChatColor.GREEN + part.toString() + " " + size);
 		}
 	}
 }

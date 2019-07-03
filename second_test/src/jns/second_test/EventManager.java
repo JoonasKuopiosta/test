@@ -1,18 +1,21 @@
 package jns.second_test;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EventManager{
 
 	Main main;
+	World world;
 	PlayerManager playerManager;
 	int totalLoopsDone;
 	// kommentti
 	
-	public EventManager(Main reference) {
-		main = reference;
+	public EventManager(Main _main, World _world) {
+		main = _main;
+		world = _world;
 	}
 	
 	public void startUp() {
@@ -22,7 +25,7 @@ public class EventManager{
 	public void commandToPlayerManager(String[] argus, Player caster) {playerManager.commandParser(argus, caster);}
 	
 	public void test() {
-		Bukkit.getLogger().info("Jeee jee");
+		Bukkit.getLogger().info("Timeri toimii!");
 	}
 	
 	public void runnable() {

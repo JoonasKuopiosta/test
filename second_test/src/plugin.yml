@@ -3,6 +3,6 @@ name: second_test
 version: 1.0.0
 
 commands:
-   hello:
+   event:
       description: Types you something
-      usage: /hello something
+      usage: /event something
