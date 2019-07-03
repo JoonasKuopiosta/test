@@ -10,8 +10,7 @@ public class EventManager{
 	Main main;
 	World world;
 	ParticipantManager participantManager;
-	MonsterManager monsterManager;
-	SurvivorManager survivorManager;
+	TeamManager teamManager;
 	int totalLoopsDone;
 	// kommentti
 	
@@ -25,8 +24,7 @@ public class EventManager{
 	}
 	
 	public void startGame() {
-		monsterManager = new MonsterManager();
-		survivorManager = new SurvivorManager();
+		teamManager = new TeamManager(participantManager);
 		//TODO: TÄHÄN!
 	}
 	
