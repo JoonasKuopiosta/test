@@ -14,12 +14,10 @@ public class Loadout {
 	
 	public Loadout() {
 		createGenericSurvior();
+		createGenericMonster();
 	}
 	
-	public PlayerInventory getGenericSurvivor() {return genericSurvivor;}
-	public PlayerInventory getGenericMonster() {return genericMonster;}
-	
-	public void createGenericSurvior() {
+	private void createGenericSurvior() {
 		ItemStack[] armor = new ItemStack[4];
 		
 		for (int i = 0; i < armor.length; i++) {
@@ -28,7 +26,7 @@ public class Loadout {
 		genericSurvivor.setArmorContents(armor);
 	}
 	
-	public void createGenericMonster() {
+	private void createGenericMonster() {
 		ItemStack[] armor = new ItemStack[4];
 		
 		for (int i = 0; i < armor.length; i++) {
@@ -36,22 +34,25 @@ public class Loadout {
 		}
 	}
 	
-	public boolean updateLoadout(PlayerInventory inv, String type) {
-		
-		if (inv != null && type != null) { //TODO: On vasta armorit!
-			inv.clear();
-			switch (type) {
-			case "genericSurvivor":
-				inv.setArmorContents(genericSurvivor.getArmorContents());
-				return true;
-			case "genericMonster":
-				inv.setArmorContents(genericMonster.getArmorContents());
-				return true;
-			default:
-				return true;
-			}
+	public boolean updateToGenericPlayer(PlayerInventory playerInv) {
+		if (playerInv != null) {
+			updateLoadout(playerInv, genericSurvivor);
+			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateToGenericMonster(PlayerInventory playerInv) {
+		if (playerInv != null) {
+			updateLoadout(playerInv, genericMonster);
+			return true;
+		}
+		return false;
+	}
+	
+	private void updateLoadout(PlayerInventory playerInv, PlayerInventory templateInv) {
+		// Armor
+		playerInv.setArmorContents(templateInv.getArmorContents());
 	}
 	
 	private ItemStack colorLeather(ItemStack armor, Color color) {

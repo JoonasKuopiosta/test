@@ -12,7 +12,6 @@ public class EventManager{
 	ParticipantManager participantManager;
 	TeamManager teamManager;
 	int totalLoopsDone;
-	// kommentti
 	
 	public EventManager(Main _main, World _world) {
 		main = _main;
