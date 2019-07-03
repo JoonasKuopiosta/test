@@ -6,11 +6,13 @@ public class Participant {
 	
 	Player player;
 	String team;
+	String type;
 	int score;
 	
 	Participant(Player play) {
 		player = play;
-		team = "survivor";
+		team = "survivor"; // survivor or monster
+		type = "generic"; // generic or alpha
 		score = 0;
 	}
 	
@@ -19,6 +21,7 @@ public class Participant {
 	public Player getPlayer() {return player;}
 	public String getTeam() {return team;}
 	public int getScore() {return score;}
+	public String getType() {return type;}
 	public String getName() {return player.getName();}
 	
 	// =========== SETTERS START HERE ===========
@@ -49,7 +52,7 @@ public class Participant {
 		return true;
 	}
 	
-	public String changeTeam() {
+	protected String changeTeam() {
 		// Changes the team of the participant to the opposite of what it currently is
 		// Returns the new team assigned to the participant
 		if (team == "survivor") {

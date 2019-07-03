@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class PlayerManager{
+public class ParticipantManager{
 
 	float maxDistForNear;
 	String prsdArgs;
@@ -16,7 +16,7 @@ public class PlayerManager{
 	ArrayList<Participant> participantList = new ArrayList<Participant>();
 	// A list that contains all current participants
 	
-	public PlayerManager() {
+	public ParticipantManager() {
 		maxDistForNear = 10.0f;
 	}
 	
@@ -37,7 +37,7 @@ public class PlayerManager{
 					if (result) {
 						infoText = "Lisäsit onnistuneesti pelaajan " + param;
 					} else {
-						infoText = "Nimellä " + param+ " ei löytynyt pelaajaa!";
+						infoText = "Nimellä " + param + " ei löytynyt pelaajaa!";
 					}
 				}
 				break;
@@ -214,4 +214,6 @@ public class PlayerManager{
 			caster.sendMessage(ChatColor.GREEN + part.toString() + " " + size);
 		}
 	}
+	
+	
 }

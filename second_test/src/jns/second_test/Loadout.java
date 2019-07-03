@@ -36,6 +36,24 @@ public class Loadout {
 		}
 	}
 	
+	public boolean updateLoadout(PlayerInventory inv, String type) {
+		
+		if (inv != null && type != null) { //TODO: On vasta armorit!
+			inv.clear();
+			switch (type) {
+			case "genericSurvivor":
+				inv.setArmorContents(genericSurvivor.getArmorContents());
+				return true;
+			case "genericMonster":
+				inv.setArmorContents(genericMonster.getArmorContents());
+				return true;
+			default:
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private ItemStack colorLeather(ItemStack armor, Color color) {
 		LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
 		meta.setColor(color);

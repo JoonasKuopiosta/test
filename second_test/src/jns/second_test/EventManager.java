@@ -9,7 +9,9 @@ public class EventManager{
 
 	Main main;
 	World world;
-	PlayerManager playerManager;
+	ParticipantManager participantManager;
+	MonsterManager monsterManager;
+	SurvivorManager survivorManager;
 	int totalLoopsDone;
 	// kommentti
 	
@@ -19,10 +21,14 @@ public class EventManager{
 	}
 	
 	public void startUp() {
-		playerManager = new PlayerManager();
+		participantManager = new ParticipantManager();
 	}
 	
-	public void commandToPlayerManager(String[] argus, Player caster) {playerManager.commandParser(argus, caster);}
+	public void startGame() {
+		//TODO: TÄHÄN!
+	}
+	
+	public void commandToPlayerManager(String[] argus, Player caster) {participantManager.commandParser(argus, caster);}
 	
 	public void test() {
 		Bukkit.getLogger().info("Timeri toimii!");
