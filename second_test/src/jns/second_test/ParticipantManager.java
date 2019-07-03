@@ -13,7 +13,7 @@ public class ParticipantManager{
 	float maxDistForNear;
 	String prsdArgs;
 	
-	ArrayList<Participant> participantList = new ArrayList<Participant>();
+	ArrayList<Participant> allParticipantList = new ArrayList<Participant>();
 	// A list that contains all current participants
 	
 	public ParticipantManager() {
@@ -118,7 +118,7 @@ public class ParticipantManager{
 	public Participant getParticipant(Player player) {
 		// Returns participant to given player, returns NULL if no match can be found from
 		// the participant list
-		for (Participant part : participantList) {
+		for (Participant part : allParticipantList) {
 			if (part.getPlayer() == player) {
 				return part;
 			}
@@ -143,15 +143,15 @@ public class ParticipantManager{
 	
 	public int clearAllParticipants() {
 		// Clears the list of players
-		int amountRemoved = participantList.size();
-		participantList.clear();
+		int amountRemoved = allParticipantList.size();
+		allParticipantList.clear();
 		return amountRemoved;
 	}
 	
 	public int teleportAllParticipantsTo(Location cords) {
 		int movedParticipants = 0;
 		
-		for (Participant part : participantList) {
+		for (Participant part : allParticipantList) {
 			part.getPlayer().teleport(cords);
 			movedParticipants++;
 		}
@@ -176,9 +176,9 @@ public class ParticipantManager{
 		// Goes through the list of participants, and if NO participant matching the player
 		// can be found returns false
 		if (player != null) {
-			for (Participant part : participantList) {
+			for (Participant part : allParticipantList) {
 				if (part.getPlayer() == player) {
-					participantList.remove(part);
+					allParticipantList.remove(part);
 					return true;
 				}
 			}
@@ -190,12 +190,12 @@ public class ParticipantManager{
 		// Creates new Participant and give player as parameter, which is then added to the participant list
 		if (checkIfNotListed(player)) {
 			Participant participant = new Participant(player);
-			participantList.add(participant);
+			allParticipantList.add(participant);
 		}
 	}
 	
 	private boolean checkIfNotListed(Player player) {
-		for (Participant part : participantList) {
+		for (Participant part : allParticipantList) {
 			if (part.getPlayer() == player) {
 				return false;
 			}
@@ -204,13 +204,13 @@ public class ParticipantManager{
 	}
 	
 	private void printAllParticipants(Player caster) {
-		int size = participantList.size();
+		int size = allParticipantList.size();
 		
-		if (participantList.size() < 1) {
+		if (allParticipantList.size() < 1) {
 			caster.sendMessage(ChatColor.RED + "Ei pelaajia :(");
 		}
 		
-		for (Participant part : participantList) {
+		for (Participant part : allParticipantList) {
 			caster.sendMessage(ChatColor.GREEN + part.toString() + " " + size);
 		}
 	}
