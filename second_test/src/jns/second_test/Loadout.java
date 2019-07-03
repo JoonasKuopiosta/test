@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-public class LoadOut {
+public class Loadout {
 	
 	PlayerInventory genericSurvivor;
 	PlayerInventory genericMonster;
