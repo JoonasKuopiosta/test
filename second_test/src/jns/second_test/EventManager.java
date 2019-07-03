@@ -25,6 +25,8 @@ public class EventManager{
 	}
 	
 	public void startGame() {
+		monsterManager = new MonsterManager();
+		survivorManager = new SurvivorManager();
 		//TODO: TÄHÄN!
 	}
 	
