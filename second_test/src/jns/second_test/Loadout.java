@@ -12,7 +12,7 @@ public class Loadout {
 	PlayerInventory genericMonster;
 	Material[] teamClothing = {Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS};
 	
-	public LoadOut() {
+	public Loadout() {
 		createGenericSurvior();
 	}
 	
