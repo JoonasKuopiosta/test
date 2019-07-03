@@ -14,11 +14,16 @@ public class Participant {
 		score = 0;
 	}
 	
-	Player getPlayer() {return player;}
-	String getTeam() {return team;}
-	int getScore() {return score;}
+	// =========== GETTERS START HERE ===========
 	
-	boolean setTeam(String newTeam) {
+	public Player getPlayer() {return player;}
+	public String getTeam() {return team;}
+	public int getScore() {return score;}
+	public String getName() {return player.getName();}
+	
+	// =========== SETTERS START HERE ===========
+	
+	public boolean setTeam(String newTeam) {
 		// Requires string that needs to be either "survivor" or "monster" and assigns that to the
 		// participant
 		switch(newTeam) {
@@ -33,7 +38,14 @@ public class Participant {
 		}
 	}
 	
-	String changeTeam() {
+	public boolean setScore(int newScore) {
+		score = newScore;
+		return true;
+	}
+	
+	// =========== REST OF METHODS START HERE ===========
+	
+	public String changeTeam() {
 		// Changes the team of the participant to the opposite of what it currently is
 		// Returns the new team assigned to the participant
 		if (team == "survivor") {
@@ -44,13 +56,13 @@ public class Participant {
 		return team;
 	}
 	
-	boolean addScore(int scoreToAdd) {
+	public boolean addScore(int scoreToAdd) {
 		score += scoreToAdd;
 		return true;
 	}
 	
-	boolean setScore(int newScore) {
-		score = newScore;
-		return true;
+	public String toString() {
+		String txt = getName() + ",  pisteet: " + getScore() + ",  puoli: " + getTeam();
+		return txt;
 	}
 }

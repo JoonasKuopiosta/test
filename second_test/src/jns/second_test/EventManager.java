@@ -9,13 +9,14 @@ public class EventManager{
 	Main main;
 	PlayerManager playerManager;
 	int totalLoopsDone;
+	// kommentti
 	
 	public EventManager(Main reference) {
 		main = reference;
 	}
 	
 	public void startUp() {
-		// TODO: asd asd asd
+		playerManager = new PlayerManager();
 	}
 	
 	public void commandToPlayerManager(String[] argus, Player caster) {playerManager.commandParser(argus, caster);}

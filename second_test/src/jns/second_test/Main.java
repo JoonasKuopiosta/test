@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		// Informs the server console that the plugin is active
 		// and sets gameRunning to false
-		getLogger().info("Joonas plugin is enabled v1.2.0");
+		getLogger().info("Joonas plugin is enabled v1.3.0");
 		matchRunning = false;
 		super.onEnable();
 	}
@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
 				case "startup":
 					if (!eventActive) {
 						eventActive = true;
+						eventManager = new EventManager(this);
 						eventManager.startUp();
 						caster.sendMessage(ChatColor.GREEN + "Aktivoit eventin! Muista lisätä pelaajat!");
 					} else {
@@ -72,9 +73,11 @@ public class Main extends JavaPlugin {
 					}
 					break;
 				default:
-				caster.sendMessage(ChatColor.LIGHT_PURPLE + "Sallitut komennot: startup, player, start");
-				break;
+					caster.sendMessage(ChatColor.LIGHT_PURPLE + "Sallitut komennot: startup, player, start");
+					break;
 				}
+			} else {
+				caster.sendMessage("Sallitut komennot: startup, player, start");
 			}
 		}
 		return true;
@@ -85,7 +88,7 @@ public class Main extends JavaPlugin {
 	private String[] toLenghtOf5(String[] args) {
 		String[] argus = new String[5];
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < args.length; i++) {
 			argus[i] = args[i];
 		}
 		return argus;
