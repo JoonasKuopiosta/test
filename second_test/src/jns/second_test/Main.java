@@ -10,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin {
 	
-	private EventManager eventManager;
+	EventManager eventManager;
 	private boolean eventActive;
 	private boolean matchRunning;
 	private World world;

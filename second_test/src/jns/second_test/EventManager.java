@@ -9,8 +9,9 @@ public class EventManager{
 
 	private Main main;
 	private World world;
-	private ParticipantManager participantManager;
-	private TeamManager teamManager;
+	ParticipantManager participantManager;
+	ActionManager actionManager;
+	TeamManager teamManager;
 	private int totalLoopsDone;
 	
 	public EventManager(Main _main, World _world) {
@@ -24,6 +25,7 @@ public class EventManager{
 	
 	public void startGame() {
 		teamManager = new TeamManager(participantManager);
+		actionManager = new ActionManager(this);
 		//TODO: TÄHÄN!
 	}
 	

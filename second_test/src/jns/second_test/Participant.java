@@ -29,16 +29,19 @@ public class Participant {
 	public boolean setTeam(String newTeam) {
 		// Requires string that needs to be either "survivor" or "monster" and assigns that to the
 		// participant
-		switch(newTeam) {
-		case "survivor":
-			team = "survivor";
-			return true;
-		case "monster":
-			team = "monster";
-			return true;
-		default:
-			return false;
+		if (newTeam != null) {
+			switch(newTeam) {
+			case "survivor":
+				team = "survivor";
+				return true;
+			case "monster":
+				team = "monster";
+				return true;
+			default:
+				return false;
+			}
 		}
+		return false;
 	}
 	
 	public boolean setScore(int newScore) {
@@ -52,7 +55,7 @@ public class Participant {
 		return true;
 	}
 	
-	protected String changeTeam() {
+	private String changeTeam() {
 		// Changes the team of the participant to the opposite of what it currently is
 		// Returns the new team assigned to the participant
 		if (team == "survivor") {
