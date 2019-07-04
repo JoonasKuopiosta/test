@@ -10,10 +10,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin {
 	
-	EventManager eventManager;
-	boolean eventActive;
-	boolean matchRunning;
-	World world;
+	private EventManager eventManager;
+	private boolean eventActive;
+	private boolean matchRunning;
+	private World world;
 	
 	//TODO: Systeemi joka automaattisesti karsii poissaolevat pelaajat
 	

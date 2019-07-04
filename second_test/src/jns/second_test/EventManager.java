@@ -7,11 +7,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class EventManager{
 
-	Main main;
-	World world;
-	ParticipantManager participantManager;
-	TeamManager teamManager;
-	int totalLoopsDone;
+	private Main main;
+	private World world;
+	private ParticipantManager participantManager;
+	private TeamManager teamManager;
+	private int totalLoopsDone;
 	
 	public EventManager(Main _main, World _world) {
 		main = _main;

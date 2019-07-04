@@ -8,9 +8,9 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class Loadout {
 	
-	PlayerInventory genericSurvivor;
-	PlayerInventory genericMonster;
-	Material[] teamClothing = {Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS};
+	private PlayerInventory genericSurvivor;
+	private PlayerInventory genericMonster;
+	private Material[] teamClothing = {Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS};
 	
 	public Loadout() {
 		createGenericSurvior();

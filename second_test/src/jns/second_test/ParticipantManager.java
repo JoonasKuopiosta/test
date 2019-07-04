@@ -10,8 +10,8 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ParticipantManager{
 
-	float maxDistForNear;
-	String prsdArgs;
+	private float maxDistForNear;
+	private String prsdArgs;
 	
 	ArrayList<Participant> allParticipantList = new ArrayList<Participant>();
 	// A list that contains all current participants

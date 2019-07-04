@@ -4,10 +4,10 @@ import org.bukkit.entity.Player;
 
 public class Participant {
 	
-	Player player;
-	String team;
-	String type;
-	int score;
+	private Player player;
+	private String team;
+	private String type;
+	private int score;
 	
 	Participant(Player play) {
 		player = play;

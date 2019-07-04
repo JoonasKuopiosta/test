@@ -2,8 +2,8 @@ package jns.second_test;
 
 public class TeamManager {
 	
-	ParticipantManager participantManager;
-	Loadout loadout;
+	private ParticipantManager participantManager;
+	private Loadout loadout;
 	
 	public TeamManager(ParticipantManager partManager) {
 		participantManager = partManager;
