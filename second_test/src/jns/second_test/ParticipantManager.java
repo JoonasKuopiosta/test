@@ -11,89 +11,13 @@ import net.md_5.bungee.api.ChatColor;
 public class ParticipantManager{
 
 	private float maxDistForNear;
-	private String prsdArgs;
+	//private String prsdArgs;
 	
 	ArrayList<Participant> allParticipantList = new ArrayList<Participant>();
 	// A list that contains all current participants
 	
 	public ParticipantManager() {
 		maxDistForNear = 10.0f;
-	}
-	
-	public void commandParser(String[] argus, Player caster) {
-		String infoText = "Sallitut player-komennot: add, remove, addnear, printall, clear, tpall";
-		boolean result = false;
-		int num = 0;
-		
-		if (argus[1] != null){
-			String param = argus[2];
-			
-			switch(argus[1]) {
-			case "add":
-				if (param == null) {
-					infoText = "Käyttötapa: add [pelaajan nimi]";
-				} else {
-					result = addParticipant(getPlayerByName(param));
-					if (result) {
-						infoText = "Lisäsit onnistuneesti pelaajan " + param;
-					} else {
-						infoText = "Nimellä " + param + " ei löytynyt pelaajaa!";
-					}
-				}
-				break;
-			case "remove":
-				if (param == null) {
-					infoText = "Käyttötapa: remove [pelaajan nimi]";
-				} else {
-					result = removeParticipant(getPlayerByName(param));
-					if (result) {
-						infoText = "Poistit onnistuneesti pelaajan " + param;
-					} else {
-						infoText = "Nimellä " + param + " ei löytynyt eventin osanottajaa!";
-					}
-				}
-				break;
-			case "addnear":
-					addNearbyPlayersToList(caster, maxDistForNear);
-					num = addNearbyPlayersToList(caster, maxDistForNear);
-					if (num < 1) {
-						infoText = "Lähelläsi ei yhtään pelaajaa!";
-					} else {
-						infoText = "Lisäsit " + num + " pelaajaa!";
-						result = true;
-					}
-				break;
-			case "clear":
-				num = clearAllParticipants();
-				if (num < 1) {
-					infoText = "Ei yhtään pelaajaa poistettavaksi! :(";
-				} else {
-					infoText = "Poistit juuri " + num + " pelaajaa";
-					result = true;
-				}
-				break;
-			case "printall":
-				printAllParticipants(caster);
-				infoText = null;
-				break;
-			case "tpall":
-				num = teleportAllParticipantsTo(caster.getLocation());
-				if (num < 1) {
-					infoText = "Ei ketään teleportattavaksi! :(";
-				} else {
-					infoText = "Teleporttasit " + num + " pelaajaa!";
-				}
-				break;
-			}
-		}
-		
-		if (infoText != null) {
-			if (result) {
-				caster.sendMessage(ChatColor.GREEN + infoText);
-			} else {
-				caster.sendMessage(ChatColor.RED + infoText);
-			}
-		}
 	}
 	
 	

@@ -2,7 +2,6 @@ package jns.second_test;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EventManager{
@@ -29,8 +28,6 @@ public class EventManager{
 		//TODO: TÄHÄN!
 	}
 	
-	public void commandToPlayerManager(String[] argus, Player caster) {participantManager.commandParser(argus, caster);}
-	
 	public void test() {
 		Bukkit.getLogger().info("Timeri toimii!");
 	}
@@ -45,7 +42,7 @@ public class EventManager{
 			
 			@Override
 			public void run() {
-				if (main.getGameRunning() && (totalLoopsDone < (maxCycles))) {
+				if ((main.getEventStage() == 3) && (totalLoopsDone < (maxCycles))) {
 					// The total loops done max equals to 15 minutes
 					
 					// Here goes the code that gets run every loop
