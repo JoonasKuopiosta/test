@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="E:/eclipse/java-2019-06/eclipse-workspace/spigot-api-1.13.2-R0.1-SNAPSHOT-shaded.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-server/spigot-1.13.2.jar"/>
+	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-server/spigot-1.14.2.jar"/>
+	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-api-1.14.2-R0.1-20190614.094430-26-shaded.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

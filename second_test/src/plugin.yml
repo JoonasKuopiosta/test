@@ -5,4 +5,3 @@ version: 2.0.0
 commands:
    event:
       description: Types you something
-      usage: /event Tells what to do

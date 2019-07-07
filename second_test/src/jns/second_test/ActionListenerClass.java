@@ -1,16 +1,23 @@
 package jns.second_test;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerBucketEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 
-public class ActionManager implements Listener {
+public class ActionListenerClass implements Listener {
 	
 	EventManager eventManager;
-	public ActionManager(EventManager reference) {
-		eventManager = reference;
+	ParticipantManager participantManager;
+	
+	public ActionListenerClass(EventManager eventMang, ParticipantManager partMang) {
+		eventManager = eventMang;
+		participantManager = partMang;
+		Bukkit.getLogger().info("Acton manager aktiivinen");
 	}
 	
 	@EventHandler
@@ -22,11 +29,29 @@ public class ActionManager implements Listener {
 			break;
 		case 1:
 			// changing team to monster
-			eventManager.participantManager.getParticipant(((Player) event.getEntity())).setTeam("monster");
 			break;
 		case 2:
-			eventManager.participantManager.getParticipant(((Player) event.getEntity())).setTeam("survivor");
 			break;
+		}
+	}
+	
+	@EventHandler
+	public void onBucket(final PlayerBucketFillEvent event) {
+		if (event != null) {
+			Player player = event.getPlayer();
+			boolean result_1;
+					;
+			result_1 = participantManager.isPlayerExist(player);
+			if (result_1) {
+				Participant part = participantManager.getParticipant(player);
+				if (part.getTeam().equalsIgnoreCase("monster")) {
+					eventManager.teamManager.participantToSurvivor(part);
+				} else {
+					eventManager.teamManager.participantToMonster(part);
+					Bukkit.getLogger().info("Yritys monsteriksi!");
+				}
+			}
+			Bukkit.getLogger().info(player.getDisplayName() + " heitti! On mukana: " + result_1);
 		}
 	}
 	

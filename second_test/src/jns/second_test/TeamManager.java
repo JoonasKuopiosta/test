@@ -18,4 +18,13 @@ public class TeamManager {
 		// change armor
 		loadout.updateToGenericPlayer(part.getPlayer().getInventory());
 	}
+	
+public void participantToSurvivor(Participant part) {
+		
+		// team change
+		part.setTeam("survivor");
+		
+		// change armor
+		loadout.updateToGenericMonster(part.getPlayer().getInventory());
+	}
 }

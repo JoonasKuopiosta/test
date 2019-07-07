@@ -21,6 +21,59 @@ public class ParticipantManager{
 	}
 	
 	
+	// =========== COMMAND LISTENERS ===========
+	
+	public String[] commandListener(String[] argus, int gameStage, Player caster) {
+		String command = argus[1];
+		String argument = argus[2];
+		
+		String defMsg[] = {"F", "Tuntematon komento! Tarkista /event"};
+		
+		if (gameStage == 1) {
+			switch (command) {
+			case "addNear":
+				int num = addNearbyPlayersToList(caster, 25);
+				defMsg[0] = "W";
+				defMsg[1] = "Lisäsit " + num + " pelaajaa!";
+				break;
+			case "add" :
+				if (addParticipantName(argument)) {
+					defMsg[0] = "W";
+					defMsg[1] = "Pelaaja " + argument + " lisätty!";
+				} else {
+					defMsg[1] = "Pelaajaa ei ole olemassa!";
+				}
+				break;
+			}
+		}
+		
+		switch (command) {
+		case "clear":
+			int num = clearAllParticipants();
+			defMsg[0] = "W";
+			defMsg[1] = "Poisti kaikki " + num + " pelaajaa!";
+			break;
+		case "list" :
+			printAllParticipants(caster);
+			defMsg[1] = "Kaikki " + allParticipantList.size() + " pelaajaa!";
+			break;
+		case "remove" :
+			if (removeParticipantName(argument)) {
+				defMsg[0] = "W";
+				defMsg[1] = "Pelaaja " + argument + " poistettu!";
+			} else {
+				defMsg[1] = "Pelaajaa ei ole olemassa!";
+			}
+			break;
+		case "tpAll" :
+			teleportAllParticipantsTo(caster.getLocation());
+			defMsg[1] = "Kaikki pelaajat teleportattu!";
+			break;
+		}
+		return defMsg;
+	}
+	
+	
 	// =========== PUBLIC METHODS START HERE ===========
 	
 	public int addNearbyPlayersToList(Player caster, double maxDist) {
@@ -59,6 +112,14 @@ public class ParticipantManager{
 		return false;
 	}
 	
+	public boolean addParticipantName(String playerName) {
+		return addParticipant(getPlayerByName(playerName));
+	}
+	
+	public boolean removeParticipantName(String playerName) {
+		return removeParticipant(getPlayerByName(playerName));
+	}
+	
 	public boolean removeParticipant(Player player) {
 		// Calls method that tries to remove player from participant list
 		// if false is returned player can't be found from the participant list
@@ -82,6 +143,28 @@ public class ParticipantManager{
 		
 		
 		return movedParticipants;
+	}
+	
+	private void printAllParticipants(Player caster) {
+		
+		if (allParticipantList.size() < 1) {
+			caster.sendMessage(ChatColor.RED + "Ei pelaajia :(");
+		}
+		
+		for (Participant part : allParticipantList) {
+			caster.sendMessage(ChatColor.GREEN + part.toString());
+		}
+	}
+	
+	public boolean isPlayerExist(Player player) {
+		if (player != null) {
+			for (Participant part : allParticipantList) {
+				if (part.getPlayer().equals(player)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	// =========== PRIVATE METHODS START HERE ===========
@@ -126,18 +209,5 @@ public class ParticipantManager{
 		}
 		return true;
 	}
-	
-	private void printAllParticipants(Player caster) {
-		int size = allParticipantList.size();
-		
-		if (allParticipantList.size() < 1) {
-			caster.sendMessage(ChatColor.RED + "Ei pelaajia :(");
-		}
-		
-		for (Participant part : allParticipantList) {
-			caster.sendMessage(ChatColor.GREEN + part.toString() + " " + size);
-		}
-	}
-	
 	
 }

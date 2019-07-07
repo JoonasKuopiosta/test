@@ -1,5 +1,6 @@
 package jns.second_test;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -8,35 +9,19 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class Loadout {
 	
-	private PlayerInventory genericSurvivor;
-	private PlayerInventory genericMonster;
-	private Material[] teamClothing = {Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS};
+	private Material[] teamClothing = {Material.LEATHER_BOOTS, Material.LEATHER_LEGGINGS, Material.LEATHER_CHESTPLATE, Material.LEATHER_HELMET};
 	
 	public Loadout() {
-		createGenericSurvior();
-		createGenericMonster();
+		
 	}
 	
-	private void createGenericSurvior() {
-		ItemStack[] armor = new ItemStack[4];
-		
-		for (int i = 0; i < armor.length; i++) {
-			armor[i] = colorLeather(new ItemStack(teamClothing[i]), Color.GREEN);
-		}
-		genericSurvivor.setArmorContents(armor);
-	}
 	
-	private void createGenericMonster() {
-		ItemStack[] armor = new ItemStack[4];
-		
-		for (int i = 0; i < armor.length; i++) {
-			armor[i] = colorLeather(new ItemStack(teamClothing[i]), Color.RED);
-		}
-	}
 	
 	public boolean updateToGenericPlayer(PlayerInventory playerInv) {
 		if (playerInv != null) {
-			updateLoadout(playerInv, genericSurvivor);
+			playerInv.clear();
+			genericSurvivorLeatherArmor(playerInv);
+			bucketHand(playerInv);
 			return true;
 		}
 		return false;
@@ -44,16 +29,48 @@ public class Loadout {
 	
 	public boolean updateToGenericMonster(PlayerInventory playerInv) {
 		if (playerInv != null) {
-			updateLoadout(playerInv, genericMonster);
+			playerInv.clear();
+			genericMonsterLeatherArmor(playerInv);
+			bucketHand(playerInv);
 			return true;
 		}
 		return false;
 	}
 	
-	private void updateLoadout(PlayerInventory playerInv, PlayerInventory templateInv) {
-		// Armor
-		playerInv.setArmorContents(templateInv.getArmorContents());
+	
+	
+	// ========= ARMOR SECTION =========
+	
+	private void genericSurvivorLeatherArmor(PlayerInventory playerInv) {
+		ItemStack[] armor = new ItemStack[4];
+		
+		for (int i = 0; i < armor.length; i++) {
+			armor[i] = colorLeather(new ItemStack(teamClothing[i]), Color.GREEN);
+		}
+		playerInv.setArmorContents(armor);
 	}
+	
+	private void genericMonsterLeatherArmor(PlayerInventory playerInv) {
+		ItemStack[] armor = new ItemStack[4];
+		
+		for (int i = 0; i < armor.length; i++) {
+			armor[i] = colorLeather(new ItemStack(teamClothing[i]), Color.RED);
+		}
+		playerInv.setArmorContents(armor);
+	}
+	
+	
+	
+	// ========= TOOL BAR =========
+	
+	private void bucketHand(PlayerInventory playerInv) {
+		ItemStack bucket = new ItemStack(Material.BUCKET);
+		playerInv.addItem(bucket);
+	}
+	
+	
+	
+	// ========= PRIVATE OTHER METHODS =========
 	
 	private ItemStack colorLeather(ItemStack armor, Color color) {
 		LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
