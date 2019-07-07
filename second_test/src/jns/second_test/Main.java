@@ -58,7 +58,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (label.equalsIgnoreCase("event") && sender instanceof Player) {
+		if (cmd.getName().equalsIgnoreCase("event") && sender instanceof Player) {
 			
 			if (!sender.hasPermission("TrueEventAdmin.allowed")) {
 				sender.sendMessage(ChatColor.RED +  "EI OLE PERMEJÄ!");

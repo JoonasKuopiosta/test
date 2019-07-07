@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-server/spigot-1.14.2.jar"/>
 	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-api-1.14.2-R0.1-20190614.094430-26-shaded.jar"/>
+	<classpathentry kind="lib" path="E:/Minecraft_server/spigot-server/spigot-1.14.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
